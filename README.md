@@ -28,3 +28,10 @@ MISC: Commandes utiles
 Serveur local : 
 php artisan serve
 
+
+Base de données :
+Migration : php artisan migrate 
+Rollback une migration : php artisan migrate:rollback
+Repartir de 0 : php artisan migrate:fresh
+Créer une table 'projects' : php artisan make:migration create_projects_table
+
