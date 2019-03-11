@@ -39,7 +39,7 @@ class CommentController extends Controller
         return redirect('articles/'.$post_name.'/');
     }
 
-    public function update(CommentRequest $request, $post_name, $id){
+    public function update(Request $request, $post_name, $id){
 
         $comment = \App\Comment::findOrFail($id);
         $comment->comment_content = $request->label;

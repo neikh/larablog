@@ -62,9 +62,9 @@
                     @endauth
                 </div>
                 <div class="card-footer">
-                    By <span class="font-weight-bold">{{$comment->comment_name}}</span>, the {{$comment->created_at}}
+                    By <span class="font-weight-bold">{{$comment->comment_name}}</span>, the {!!$comment->dateWritter($comment->created_at)!!}
                     @if ($comment->created_at != $comment->updated_at)
-                        , (last edition the {{$comment->updated_at}})
+                        , last edition the {!!$comment->dateWritter($comment->updated_at)!!}
                     @endif
 
                 </div>
@@ -104,7 +104,7 @@
         </div>
     @else
         <div class="col-md-8 text-center container">
-            <span class="font-weight-bold">The ability to troll into the comments is only for registered users.</span>
+            <span class="font-weight-bold">The ability to troll in the comments is for registered users only.</span>
         </div>
     @endauth
 @endsection
