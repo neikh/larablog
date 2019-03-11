@@ -15,7 +15,13 @@
                                 </div>
                             @endif
 
-                            Welcome to the admin panel !
+                            <p class='text-center'>Welcome to the <span class="font-weight-bold">admin panel</span>!</p>
+
+                            <p class='text-center'>
+                                <a href="/admin/articles" class="px-xl-3 font-weight-bold">Articles</a>
+                                <a href="/admin/users" class="px-xl-3 font-weight-bold">Users</a>
+                                <a href="/admin/comments" class="px-xl-3 font-weight-bold">Comments</a>
+                            </p>
                         </div>
                     </div>
                 </div>

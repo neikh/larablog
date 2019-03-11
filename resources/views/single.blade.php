@@ -18,10 +18,12 @@
             <div class="card-body">
                 {{ $post->post_content }}
                 <div class="text-right">
-                    @if (Auth::user()->name == $user->name)
-                        <i class="fas fa-edit"></i>
-                        <i class="far fa-trash-alt"></i>
-                    @endif
+                    @auth
+                        @if (Auth::user()->name == $user->name)
+                            <i class="fas fa-edit"></i>
+                            <i class="far fa-trash-alt"></i>
+                        @endif
+                    @endauth
                 </div>
             </div>
             <div class="card-footer">
@@ -49,15 +51,15 @@
             <div class="card">
                 <div class="card-body">
 
-                    <textarea id="com_{{$comment->id}}" class="form-control bg-transparent border-0" onkeyup="writting({{$comment->id}}, '{{$post->post_name}}', event, this.value); return false" disabled>{{ $comment->comment_content }}</textarea>
-
-                    @if (Auth::user()->name == $comment->comment_name)
-                        <div class="text-right">
-                            <a href="#"><i class="fas fa-edit" onclick="editionMode(document.getElementById('com_{{$comment->id}}')); return false"></i></a>
-                            <a href="{{ $url }}/delete/{{$comment->id}}"><i class="far fa-trash-alt"></i></a>
-                        </div>
-                    @endif
-
+                    <textarea id="com_{{$comment->id}}" class="form-control bg-transparent border-0" name="comment_modif" onkeyup="writting({{$comment->id}}, '{{$post->post_name}}', event, this.value); return false" disabled>{{ $comment->comment_content }} {{ old('comment_modif') }}</textarea>
+                    @auth
+                        @if (Auth::user()->name == $comment->comment_name)
+                            <div class="text-right">
+                                <a href="#"><i class="fas fa-edit" onclick="editionMode(document.getElementById('com_{{$comment->id}}')); return false"></i></a>
+                                <a href="{{ $url }}/delete/{{$comment->id}}"><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        @endif
+                    @endauth
                 </div>
                 <div class="card-footer">
                     By <span class="font-weight-bold">{{$comment->comment_name}}</span>, the {{$comment->created_at}}
