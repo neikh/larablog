@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/articles', 'ArticlesController@index');
+Route::get('/articles/{post_name}', 'ArticlesController@show');
+Route::get('/admin', 'AdminController@index');

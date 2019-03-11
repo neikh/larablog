@@ -1,34 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    @auth
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">Dashboard</div>
-
-                        <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-
-                            You are logged in!
-                        </div>
-                    </div>
-                </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="text-center">
+               Don't you love when the&nbsp;<a href="/admin">admin</a>&nbsp;part is in plain sight?
             </div>
         </div>
-    @endauth
+    </div>
 @endsection
 
 @section('displayData')
 
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header">Recent Articles</div>
+        <div class="card-header">5 Most Recent Articles</div>
+        <div class="card-body">
             <ul>
                 @if(isset($posts) && $posts->count() > 0)
                     @foreach ( $posts as $post )
@@ -38,8 +25,6 @@
                     <li>No articles yet...</li>
                 @endif
             </ul>
-        <div class="card-body">
-
         </div>
     </div>
 </div>

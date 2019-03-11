@@ -79,8 +79,12 @@
         <main class="py-4">
 
             @yield('content')
+
             <br />
             @yield('displayData')
+
+            <br />
+            @yield('displayCom')
 
         </main>
     </div>
