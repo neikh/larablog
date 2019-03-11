@@ -34,6 +34,28 @@ a laravel blog
         - layouts/app.blade.php, affiche les liens login et register si guest, le nom du user si enregistré
         - Dons nos controller, on retrouve $this->middleware('auth'); dans le constructeur. Cela permet d'apeller notre authentification lorsque l'on apelle certains controller, ou les limiter à certaines fonctions d'un controller.
 
+
+3) Formulaires
+
+    Pour éviter d'avoir la popup de renvoie après une validation de formulaire, on peut renvoyer une redirection plutôt qu'une vue :
+        return redirect('/articles/'.$post->post_name.'/');
+
+    On crée un request controller avec artisan, puis on l'apelle dans notre controller :
+        use App\Http\Requests\CommentRequest;
+
+    Dans notre fonction (par exemple store), on va identifier la requère comme un objet a verifier :
+        public function store(CommentRequest $request)
+
+    Puis dans notre request controller, on va établir les règles a respecter pour que le formulaire soit validé :
+        public function rules(){
+            return [
+                'comment_name' => 'bail|required|between:1,20|alpha',
+                'comment_email' => 'bail|required|email',
+                'comment_message' => 'bail|required|max:250'
+            ];
+        }
+
+
 ------------------------------------
 
 Utilisation de blade
@@ -69,8 +91,15 @@ Utilisation de blade
     Si un user est guest :
         @guest
             Welcome Guest
-        @endauth
+        @endguest
 
+    pour utiliser la classe auth:
+        use Illuminate\Support\Facades\Auth;
+
+    On peut ensuite récupérer les valeurs de sessions de cette manière :
+        Auth::user()->name;
+
+    
 -------------------------------------
 
 MISC: Commandes utiles
@@ -94,3 +123,19 @@ MISC: Commandes utiles
         Créer un controller : php artisan make:Controller HomeController
         Créer un modèle : php artisan make:model Post
         Le modèle crée doit avoir le même nom que la base de données ! Si cce n'est pas le cas, il faut rajouter dasn le modèle : protected $table = 'my_flights';
+
+
+    4)Login
+
+        Quand on se log, on est automatiquement renvoyé vers /home,ce qui peut être non-souhaité. Pour rester sur la page actuelle, on peut rajouter la fonction suivante dans la classe auth/LoginController.php :
+
+            public function showLoginForm(){
+                if(!session()->has('url.intended'))
+                {
+                    session(['url.intended' => url()->previous()]);
+                }
+                return view('auth.login');
+            }
+
+        Pour créer un fichier de validation de formulaire :
+            php artisan make:request ContactRequest
