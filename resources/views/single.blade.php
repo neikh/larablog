@@ -56,7 +56,7 @@
                         @if (Auth::user()->name == $comment->comment_name)
                             <div class="text-right">
                                 <a href="#"><i class="fas fa-edit" onclick="editionMode(document.getElementById('com_{{$comment->id}}')); return false"></i></a>
-                                <a href="{{ $url }}/delete/{{$comment->id}}"><i class="far fa-trash-alt"></i></a>
+                            <a href="/articles/{{$post->post_name}}/delete/{{$comment->id}}"><i class="far fa-trash-alt"></i></a>
                             </div>
                         @endif
                     @endauth

@@ -22,8 +22,9 @@ function writting(id, post_name, event, label){
            editionMode(document.getElementById('com_'+id));
         }
 
+        console.log(id, post_name, event, label);
         let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        xhr.open("POST",'update/'+id, true);
+        xhr.open("POST",'/articles/'+post_name+'/update/'+id, true);
         xhr.setRequestHeader('X-CSRF-TOKEN', token);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
         xhr.send(
