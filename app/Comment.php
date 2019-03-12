@@ -13,6 +13,15 @@ class Comment extends Model
 		return $this->belongsTo('App\Post');
     }
 
+    public function limit_text($text, $limit) {
+        if (str_word_count($text, 0) > $limit) {
+            $words = str_word_count($text, 2);
+            $pos = array_keys($words);
+            $text = substr($text, 0, $pos[$limit]) . '...';
+        }
+        return $text;
+    }
+
     public function dateWritter($date){
 		$dateDaySec = explode(" ", $date);
 
