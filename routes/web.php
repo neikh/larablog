@@ -31,3 +31,5 @@ Route::get('/admin/users/{p}/', 'AdminController@users');
 
 Route::get('/admin/comments', 'AdminController@comments');
 Route::get('/admin/comments/{p}/', 'AdminController@comments');
+
+Route::get('/admin/{type}/grab/{id}', 'AdminController@display');

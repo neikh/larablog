@@ -11,7 +11,7 @@ function editionMode(e){
 }
 
 function writting(id, post_name, event, label){
-    console.log(event.code);
+
     if (event.code == 'Enter' && !event.shiftKey){
 
         // Creation de l'objet XMLHttpRequest
@@ -19,7 +19,9 @@ function writting(id, post_name, event, label){
 
         xhr.onreadystatechange = function()
         {
-           editionMode(document.getElementById('com_'+id));
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                editionMode(document.getElementById('com_'+id));
+            }
         }
 
         let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -31,4 +33,39 @@ function writting(id, post_name, event, label){
             "&label="+ label
         );
     }
+}
+
+function modal(type, id = 0){
+    let modal = document.getElementById('bgmodal');
+
+    if (type == "post"){
+        modal.style.top = 0;
+        loadContent(type, id);
+    }
+
+    if (type == "remove"){
+        modal.style.top = "-100%";
+    }
+}
+
+function loadContent(type, id){
+    xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+            obj = JSON.parse(xhr.response);
+            console.log(obj[0].post_type);
+
+            for (var key in obj[0]) {
+                if (key != 'post_date' && key != 'created_at' && key != 'updated_at' && key != 'post_author'){
+                    document.getElementById(key).value = obj[0][key];
+                }
+            }
+
+        }
+    }
+
+    xhr.open("GET",'/admin/'+type+'/grab/'+id, true);
+    xhr.send();
 }

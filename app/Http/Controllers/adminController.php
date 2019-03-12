@@ -115,5 +115,13 @@ class adminController extends Controller
 		$write .= '</div>';
 
 		return $write;
-	}
+    }
+
+    public function display($type, $id){
+        if ($type == "post"){
+            $post = \App\Post::where('id', $id)->get();
+
+            return json_encode($post);
+        }
+    }
 }

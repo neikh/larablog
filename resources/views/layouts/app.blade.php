@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -79,8 +80,12 @@
         <main class="py-4">
 
             @yield('content')
+
             <br />
             @yield('displayData')
+
+            <br />
+            @yield('switch')
 
         </main>
     </div>

@@ -14,7 +14,7 @@
 
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header">5 Most Recent Articles</div>
+        <div class="card-header">{{$posts->count()}} Most Recents Articles</div>
         <div class="card-body">
             <ul>
                 @if(isset($posts) && $posts->count() > 0)
