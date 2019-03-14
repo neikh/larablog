@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($posts as $post)
-                                    <tr onclick="modal('post', {{$post->id}}); return false">
+                                    <tr class="pointer" onclick="modal('post', {{$post->id}}); return false">
                                         <td class="text-center p-2">{{$post->id}}</td>
                                         <td class="p-2">{{$post->post_title}}</td>
                                         <td class="p-2">{{$post->limit_text($post->post_content, 15)}}</td>
@@ -139,48 +139,60 @@
                     ?>
 
                     <div class="col-md-8 text-center container">
-                        <form action="{{ $url }}" method="POST">
+                        <form id="contentUpdater" method="POST">
                             {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="patch"/>
+
                             <div class="form-group">
-                                <input type="number" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" name="id" id="id" placeholder="0"
-                                    value="{{ old('id') }}" disabled> {!! $errors->first('id', '
-                                <div class="invalid-feedback">:message</div>') !!}
+                                <label for="id" class="pointer d-lg-block font-weight-bold"><span>Article ID</span>
+                                    <input type="number" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" name="id" id="id" placeholder="0"
+                                    value="{{ old('id') }}" disabled> {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
+                                </label>
                             </div>
+
                             <div class="form-group">
-                                <input type="text" class="form-control {{ $errors->has('post_title') ? 'is-invalid' : '' }}" name="post_title" id="post_title" placeholder="Article's title"
-                                    value="{{ old('post_title') }}"> {!! $errors->first('post_title', '
-                                <div class="invalid-feedback">:message</div>') !!}
+                                <label for="post_title" class="pointer d-lg-block font-weight-bold"><span>Article Title</span>
+                                    <input type="text" class="form-control {{ $errors->has('post_title') ? 'is-invalid' : '' }}" name="post_title" id="post_title" placeholder="Article's title"
+                                        value="{{ old('post_title') }}"> {!! $errors->first('post_title', '<div class="invalid-feedback">:message</div>') !!}
+                                </label>
                             </div>
+
                             <div class="form-group">
-                                <textarea class="form-control {{ $errors->has('post_content') ? 'is-invalid' : '' }}" name="post_content" id="post_content" placeholder="The article's content">{{ old('post_content') }}</textarea>
-                                {!! $errors->first('post_content', '
-                                <div class="invalid-feedback">:message</div>') !!}
+                                <label for="post_content" class="pointer d-lg-block font-weight-bold"><span>Article Content</span>
+                                    <textarea class="form-control {{ $errors->has('post_content') ? 'is-invalid' : '' }}" name="post_content" id="post_content" placeholder="The article's content">{{ old('post_content') }}</textarea>
+                                    {!! $errors->first('post_content', '<div class="invalid-feedback">:message</div>') !!}
+                                </label>
                             </div>
+
                             <div class="form-group">
-                                <input type="text" class="form-control {{ $errors->has('post_status') ? 'is-invalid' : '' }}" name="post_status" id="post_status" placeholder="The article's status"
-                                value ="{{ old('post_status') }}">
-                                {!! $errors->first('post_status', '
-                                <div class="invalid-feedback">:message</div>') !!}
+                                <label for="post_status" class="pointer d-lg-block font-weight-bold"><span>Article Status</span>
+                                    <input type="text" class="form-control {{ $errors->has('post_status') ? 'is-invalid' : '' }}" name="post_status" id="post_status" placeholder="The article's status"
+                                    value ="{{ old('post_status') }}"> {!! $errors->first('post_status', '<div class="invalid-feedback">:message</div>') !!}
+                                </label>
                             </div>
+
                             <div class="form-group">
-                                <input type="text" class="form-control {{ $errors->has('post_name') ? 'is-invalid' : '' }}" name="post_name" id="post_name" placeholder="The article's name"
-                                value ="{{ old('post_name') }}">
-                                {!! $errors->first('post_name', '
-                                <div class="invalid-feedback">:message</div>') !!}
+                                <label for="post_name" class="pointer d-lg-block font-weight-bold"><span>Article Name</span>
+                                    <input type="text" class="form-control {{ $errors->has('post_name') ? 'is-invalid' : '' }}" name="post_name" id="post_name" placeholder="The article's name"
+                                    value ="{{ old('post_name') }}">{!! $errors->first('post_name', '<div class="invalid-feedback">:message</div>') !!}
+                                </label>
                             </div>
+
                             <div class="form-group">
+                                <label for="post_type" class="pointer d-lg-block font-weight-bold"><span>Article Type</span>
                                     <input type="text" class="form-control {{ $errors->has('post_type') ? 'is-invalid' : '' }}" name="post_type" id="post_type" placeholder="The article's type"
-                                    value ="{{ old('post_type') }}">
-                                    {!! $errors->first('post_type', '
-                                    <div class="invalid-feedback">:message</div>') !!}
-                                </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control {{ $errors->has('post_category') ? 'is-invalid' : '' }}" name="post_category" id="post_category" placeholder="The article's category"
-                                value ="{{ old('post_category') }}">
-                                {!! $errors->first('post_category', '
-                                <div class="invalid-feedback">:message</div>') !!}
+                                    value ="{{ old('post_type') }}">{!! $errors->first('post_type', '<div class="invalid-feedback">:message</div>') !!}
+                                </label>
                             </div>
-                            <button type="submit" class="btn btn-secondary">Update</button>
+
+                            <div class="form-group">
+                                <label for="post_category" class="pointer d-lg-block font-weight-bold"><span>Article Category</span>
+                                    <input type="text" class="form-control {{ $errors->has('post_category') ? 'is-invalid' : '' }}" name="post_category" id="post_category" placeholder="The article's category"
+                                    value ="{{ old('post_category') }}">{!! $errors->first('post_category', '<div class="invalid-feedback">:message</div>') !!}
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary">Update</button> <button class="btn btn-danger" onclick="remove(document.getElementById('id'), 'post'); return false">Delete</button>
                         </form>
                     </div>
                 </div>

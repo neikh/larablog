@@ -33,3 +33,5 @@ Route::get('/admin/comments', 'AdminController@comments');
 Route::get('/admin/comments/{p}/', 'AdminController@comments');
 
 Route::get('/admin/{type}/grab/{id}', 'AdminController@display');
+Route::post('/admin/{type}/delete/{id}', 'AdminController@delete');
+Route::patch('/admin/{type}/update/{id}', 'AdminController@update');

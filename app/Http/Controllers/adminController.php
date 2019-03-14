@@ -124,4 +124,37 @@ class adminController extends Controller
             return json_encode($post);
         }
     }
+
+    public function delete($type, $id){
+        if ($type == "post"){
+            $posts = \App\Post::where('id', $id)->get();
+            $comments = \App\Comment::where('post_id', $id)->get();
+
+            foreach($comments as $comment){
+                $comment->delete();
+            }
+
+            foreach($posts as $post){
+                $post->delete();
+            }
+        }
+    }
+
+    public function update(Request $request, $type, $id){
+
+        $post = \App\Post::findOrFail($id);
+
+        $post->id = $id;
+        $post->post_title = $request->post_title;
+        $post->post_content = $request->post_content;
+        $post->post_status = $request->post_status;
+        $post->post_name = $request->post_name;
+        $post->post_type = $request->post_type;
+        $post->post_category = $request->post_category;
+
+        $post->save();
+
+        return $this->articles();
+
+    }
 }

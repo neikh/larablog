@@ -55,17 +55,52 @@ function loadContent(type, id){
     {
         if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
             obj = JSON.parse(xhr.response);
-            console.log(obj[0].post_type);
 
             for (var key in obj[0]) {
                 if (key != 'post_date' && key != 'created_at' && key != 'updated_at' && key != 'post_author'){
                     document.getElementById(key).value = obj[0][key];
                 }
             }
+            document.getElementById('contentUpdater').action = '/admin/'+type+'/update/'+obj[0]['id'];
 
         }
     }
 
     xhr.open("GET",'/admin/'+type+'/grab/'+id, true);
     xhr.send();
+}
+
+function remove(element, type){
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover your article, and all the comments will be deleted as well.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+
+            xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function()
+            {
+                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+                    modal('remove');
+                    window.location.reload(false);
+                }
+            }
+
+            let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            xhr.open("POST",'/admin/'+type+'/delete/'+element.value, true);
+            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+            xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+            xhr.send();
+
+
+
+        } else {
+            return false;
+        }
+      });
 }

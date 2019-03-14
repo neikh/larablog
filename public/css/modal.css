@@ -35,3 +35,7 @@
     top: 5px;
     right: 10px;
 }
+
+.pointer{
+    cursor: pointer;
+}
