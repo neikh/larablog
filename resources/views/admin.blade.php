@@ -38,7 +38,7 @@
                 <div class="col-md-12">
 
                     @if(isset($posts))
-                        {!!$pagination!!}
+                        {{ $posts->links() }}
                         <table class="table-bordered table-striped justify-content-center">
                             <thead class="text-center font-weight-bold">
                                 <tr>
@@ -57,21 +57,21 @@
                                     <tr class="pointer" onclick="modal('post', {{$post->id}}); return false">
                                         <td class="text-center p-2">{{$post->id}}</td>
                                         <td class="p-2">{{$post->post_title}}</td>
-                                        <td class="p-2">{{$post->limit_text($post->post_content, 15)}}</td>
+                                        <td class="p-2">{{Custom::limit_text($post->post_content, 15)}}</td>
                                         <td class="text-center p-2">{{$post->post_status}}</td>
                                         <td class="text-center p-2">{{$post->post_name}}</td>
                                         <td class="text-center p-2">{{$post->post_type}}</td>
                                         <td class="text-center p-2">{{$post->post_category}}</td>
-                                        <td class="text-center p-2">{!!$post->dateWritter($post->post_date)!!}</td>
+                                        <td class="text-center p-2">{!!Custom::dateWritter($post->post_date)!!}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {!!$pagination!!}
+                        {{ $posts->links() }}
                     @endif
 
                     @if(isset($users))
-                        {!!$pagination!!}
+                        {{ $users->links() }}
                         <table class="table-bordered table-striped justify-content-center">
                             <thead class="text-center font-weight-bold">
                                 <tr>
@@ -87,16 +87,16 @@
                                         <td class="text-center p-2">{{$user->id}}</td>
                                         <td class="p-2">{{$user->name}}</td>
                                         <td class="p-2">{{$user->email}}</td>
-                                        <td class="text-center p-2">{!!$user->dateWritter($user->email_verified_at)!!}</td>
+                                        <td class="text-center p-2">{!!Custom::dateWritter($user->email_verified_at)!!}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {!!$pagination!!}
+                        {{ $users->links() }}
                     @endif
 
                     @if(isset($comments))
-                        {!!$pagination!!}
+                        {{ $comments->links() }}
                         <table class="table-bordered table-striped justify-content-center">
                             <thead class="text-center font-weight-bold">
                                 <tr>
@@ -113,13 +113,13 @@
                                         <td class="text-center p-2">{{$comment->id}}</td>
                                         <td class="p-2">{{$comment->comment_name}}</td>
                                         <td class="p-2">{{$comment->comment_email}}</td>
-                                        <td class="p-2">{{$comment->limit_text($comment->comment_content, 15)}}</td>
-                                        <td class="p-2">{!!$comment->dateWritter($comment->comment_date)!!}</td>
+                                        <td class="p-2">{{Custom::limit_text($comment->comment_content, 15)}}</td>
+                                        <td class="p-2">{!!Custom::dateWritter($comment->comment_date)!!}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {!!$pagination!!}
+                        {{ $comments->links() }}
                     @endif
                 </div>
             </div>
