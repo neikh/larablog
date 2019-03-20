@@ -62,9 +62,9 @@
                     @endauth
                 </div>
                 <div class="card-footer">
-                    By <span class="font-weight-bold">{{$comment->comment_name}}</span>, the {!!$comment->dateWritter($comment->created_at)!!}
+                    By <span class="font-weight-bold">{{$comment->comment_name}}</span>, the {!!Custom::dateWritter($comment->created_at)!!}
                     @if ($comment->created_at != $comment->updated_at)
-                        , last edition the {!!$comment->dateWritter($comment->updated_at)!!}
+                        , last edition the {!!Custom::dateWritter($comment->updated_at)!!}
                     @endif
 
                 </div>

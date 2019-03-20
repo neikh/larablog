@@ -17,8 +17,8 @@ class adminController extends Controller
     }
 
     public function articles(){
-        $postCount = \App\Post::orderby('id', 'DESC')->count();
-        $posts = \App\Post::orderby('id', 'DESC', $postCount)->paginate(25);
+        $postCount = \App\Post::where('post_type','article')->orderby('id', 'DESC')->count();
+        $posts = \App\Post::where('post_type','article')->orderby('id', 'DESC', $postCount)->paginate(25);
 
         return view('admin',[
             'posts' => $posts,
@@ -41,6 +41,19 @@ class adminController extends Controller
         return view('admin',[
             'comments' => $comments,
         ]);
+    }
+
+    public function media(){
+
+        $mediaCount = \App\Post::where('post_type','media')->orderby('id', 'DESC')->count();
+        $media = \App\Post::where('post_type','media')->orderby('id', 'DESC', $mediaCount)->paginate(25);
+        $link = "media";
+
+        return view('admin',[
+            'medias' => $media,
+            'link' => $link,
+        ]);
+
     }
 
     public function display($type, $id){
@@ -66,11 +79,11 @@ class adminController extends Controller
         }
     }
 
-    public function update(Request $request, $type, $id){
+    public function update(Request $request){
 
-        $post = \App\Post::findOrFail($id);
+        $post = \App\Post::findOrFail($request->id);
 
-        $post->id = $id;
+        $post->id = $request->id;
         $post->post_title = $request->post_title;
         $post->post_content = $request->post_content;
         $post->post_status = $request->post_status;

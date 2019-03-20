@@ -24,13 +24,13 @@ Route::post('/articles/{post_name}', 'CommentController@store');
 
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/articles', 'AdminController@articles');
-Route::get('/admin/articles/{p}/', 'AdminController@articles');
+Route::patch('/admin/articles', 'AdminController@update');
 
 Route::get('/admin/users', 'AdminController@users');
-Route::get('/admin/users/{p}/', 'AdminController@users');
 
 Route::get('/admin/comments', 'AdminController@comments');
-Route::get('/admin/comments/{p}/', 'AdminController@comments');
+
+Route::get('/admin/media', 'AdminController@media');
 
 Route::get('/admin/{type}/grab/{id}', 'AdminController@display');
 Route::post('/admin/{type}/delete/{id}', 'AdminController@delete');

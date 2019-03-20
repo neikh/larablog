@@ -21,6 +21,7 @@
                                 <a href="/admin/articles" class="px-xl-3 font-weight-bold">Articles</a>
                                 <a href="/admin/users" class="px-xl-3 font-weight-bold">Users</a>
                                 <a href="/admin/comments" class="px-xl-3 font-weight-bold">Comments</a>
+                                <a href="/admin/media" class="px-xl-3 font-weight-bold">Media</a>
                             </p>
                         </div>
                     </div>
@@ -68,6 +69,32 @@
                             </tbody>
                         </table>
                         {{ $posts->links() }}
+                    @endif
+
+                    @if (isset($link) AND $link == "media")
+                        <div>
+                            <div class="text-center">
+                                <label for="fileToUpload" class="label-file">Choisir une image de couverture</label>
+                                <input id="fileToUpload" class="input-file d-xl-none" type="file">
+                                <input type="submit" value="Upload" id="startUpload">
+
+                                <div>
+                                    <div id="displayFile"></div>
+                                    <progress id="progress" value="0"></progress><br />
+                                    <span id="display"></span>
+                                </div>
+                            </div>
+
+                            @if(isset($media))
+                            {{ $media->links() }}
+                                @foreach ($medias as $media)
+                                    <div class="pointer" onclick="modal('post', {{$post->id}}); return false">
+                                    <img src="{{$media->media_content}}">
+                                    </div>
+                                @endforeach
+                            {{ $medias->links() }}
+                            @endif
+                        </div>
                     @endif
 
                     @if(isset($users))
@@ -146,7 +173,7 @@
                             <div class="form-group">
                                 <label for="id" class="pointer d-lg-block font-weight-bold"><span>Article ID</span>
                                     <input type="number" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" name="id" id="id" placeholder="0"
-                                    value="{{ old('id') }}" disabled> {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
+                                    value="{{ old('id') }}" readonly> {!! $errors->first('id', '<div class="invalid-feedback">:message</div>') !!}
                                 </label>
                             </div>
 
