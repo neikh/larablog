@@ -93,10 +93,28 @@
                                                 <div class="card-header">My media</div>
 
                                                 <div class="card-body">
-                                                    @foreach ($files as $file)
-                                                        <img src="{{ asset('storage/thumb/'.$file) }}" />
-                                                    @endforeach
+                                                    <table class="table-bordered table-striped justify-content-center mx-xl-auto">
+                                                        <tbody>
+                                                            @foreach ($files as $file)
+                                                                <tr>
+                                                                    <td><img src="{{ asset('storage/thumb/'.$file) }}" /></td>
+                                                                    <td class="align-top px-xl-3">
+                                                                        <span class="font-weight-bold">Name : </span>{{ $file }}<br />
+                                                                        <span class="font-weight-bold">Size : </span>{{ floor(filesize('storage/'.$file)/1000) }}ko<br />
+                                                                        <span class="font-weight-bold">Appear in : </span>
+                                                                            <div class="px-xl-3">
+                                                                                Articles which use this picture will appear here.
+                                                                            </div>
+
+                                                                    </td>
+                                                                    <td><i class="fas fa-edit display-2 px-xl-3"></i></td>
+                                                                    <td><i class="far fa-trash-alt display-2 px-xl-3"></i></td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
