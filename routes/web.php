@@ -31,6 +31,7 @@ Route::get('/admin/users', 'AdminController@users');
 Route::get('/admin/comments', 'AdminController@comments');
 
 Route::get('/admin/media', 'AdminController@media');
+Route::post('/admin/media', 'ImageController@store');
 
 Route::get('/admin/{type}/grab/{id}', 'AdminController@display');
 Route::post('/admin/{type}/delete/{id}', 'AdminController@delete');

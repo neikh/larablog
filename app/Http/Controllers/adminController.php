@@ -43,15 +43,23 @@ class adminController extends Controller
         ]);
     }
 
-    public function media(){
+    public static function media(){
 
-        $mediaCount = \App\Post::where('post_type','media')->orderby('id', 'DESC')->count();
-        $media = \App\Post::where('post_type','media')->orderby('id', 'DESC', $mediaCount)->paginate(25);
         $link = "media";
+        $files = \Storage::disk('public')->files();
+
+        foreach($files as $file){
+
+            if (!\Storage::exists('thumb/'.$file)) {
+                \File::copy(base_path('storage/app/public/'.$file),base_path('storage/app/public/thumb/'.$file));
+                $img = \Image::make(base_path('storage/app/public/thumb/'.$file))->resize(300, 200)->save(base_path('storage/app/public/thumb/'.$file));
+            }
+
+        }
 
         return view('admin',[
-            'medias' => $media,
             'link' => $link,
+            'files' => $files,
         ]);
 
     }

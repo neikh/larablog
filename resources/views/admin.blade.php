@@ -74,25 +74,33 @@
                     @if (isset($link) AND $link == "media")
                         <div>
                             <div class="text-center">
-                                <label for="fileToUpload" class="label-file">Choisir une image de couverture</label>
-                                <input id="fileToUpload" class="input-file d-xl-none" type="file">
-                                <input type="submit" value="Upload" id="startUpload">
-
-                                <div>
-                                    <div id="displayFile"></div>
-                                    <progress id="progress" value="0"></progress><br />
-                                    <span id="display"></span>
-                                </div>
+                                <form action="/admin/media" method="POST" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    Media to upload
+                                    <br />
+                                    <input type="file" name="image" />
+                                    <br /><br />
+                                    <input type="submit" value=" Save " />
+                                    <br /><br />
+                                </form>
                             </div>
 
-                            @if(isset($media))
-                            {{ $media->links() }}
-                                @foreach ($medias as $media)
-                                    <div class="pointer" onclick="modal('post', {{$post->id}}); return false">
-                                    <img src="{{$media->media_content}}">
+                            @if(isset($files))
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">My media</div>
+
+                                                <div class="card-body">
+                                                    @foreach ($files as $file)
+                                                        <img src="{{ asset('storage/thumb/'.$file) }}" />
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                @endforeach
-                            {{ $medias->links() }}
+                                </div>
                             @endif
                         </div>
                     @endif

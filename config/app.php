@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -175,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CustomServiceProvider::class,
+
 
     ],
 
@@ -229,6 +231,7 @@ return [
 
         //custom
         'Custom' => App\Helpers\Custom\Functions::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
