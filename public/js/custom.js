@@ -110,3 +110,22 @@ function remove(element, type){
         }
       });
 }
+
+function joke(element) {
+    var audio = document.getElementsByTagName("audio")[0];
+    audio.play();
+
+    var this_offset = $(element).offset();
+    var that_id     = $(element).attr("href");
+    var that_offset = $(that_id).offset();
+    var offset_diff = Math.abs(that_offset.top - this_offset.top);
+
+    var base_speed  = 5000; // Time in ms per 1,000 pixels
+    var speed       = (offset_diff * base_speed) / 1000;
+
+    $("html,body").animate({
+        scrollTop: that_offset.top
+    }, speed);
+
+    return audio.pause();
+};

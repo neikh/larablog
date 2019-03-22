@@ -253,4 +253,8 @@
         </div>
     @endauth
     <script type="text/javascript" src="{!! asset('js/custom.js') !!}"></script>
+    <audio>
+        <source src="/musique/loop.mp3"></source>
+    </audio>
+    <a href="#app" id="backToTop" class="anchorLink" onclick="joke(this); return false"><i class="fas fa-arrow-alt-circle-up display-4"></i></a>
 @endSection

@@ -39,3 +39,10 @@
 .pointer{
     cursor: pointer;
 }
+
+#backToTop{
+    position: fixed;
+    bottom: 5px;
+    right: 10px;
+    opacity: O.7;
+}
