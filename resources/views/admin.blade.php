@@ -78,9 +78,9 @@
                                     {{ csrf_field() }}
                                     Media to upload
                                     <br />
-                                    <input type="file" name="image" />
+                                    <input type="file" name="image" value="" />
                                     <br /><br />
-                                    <input type="submit" value=" Save " />
+                                    <input type="submit" name="valide" value="Save" />
                                     <br /><br />
                                 </form>
                             </div>
@@ -96,7 +96,7 @@
                                                     <table class="table-bordered table-striped justify-content-center mx-xl-auto">
                                                         <tbody>
                                                             @foreach ($files as $file)
-                                                                <tr>
+                                                                <tr id="{{ $file }}" class="moveLeft">
                                                                     <td><img src="{{ asset('storage/thumb/'.$file) }}" /></td>
                                                                     <td class="align-top px-xl-3">
                                                                         <span class="font-weight-bold">Name : </span>{{ $file }}<br />
@@ -107,8 +107,8 @@
                                                                             </div>
 
                                                                     </td>
-                                                                    <td><i class="fas fa-edit display-2 px-xl-3"></i></td>
-                                                                    <td><i class="far fa-trash-alt display-2 px-xl-3"></i></td>
+                                                                    <td><i class="fas fa-edit display-2 px-xl-3 pointer"></i></td>
+                                                                    <td><i class="far fa-trash-alt display-2 px-xl-3 pointer" onclick="remove('{{$file}}', 'media')"></i></td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>

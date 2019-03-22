@@ -73,7 +73,7 @@ function loadContent(type, id){
 function remove(element, type){
     swal({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover your article, and all the comments will be deleted as well.",
+        text: "Once deleted, you will not be able to recover your "+type+".",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -92,7 +92,13 @@ function remove(element, type){
             }
 
             let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            xhr.open("POST",'/admin/'+type+'/delete/'+element.value, true);
+            if (type == 'media'){
+                document.getElementById(element).style.transition= "all 0.5s ease-in-out";
+                document.getElementById(element).style.transform= "translate(200%, 2px)";
+                xhr.open("POST",'/admin/'+type+'/delete/'+element, true);
+            } else {
+                xhr.open("POST",'/admin/'+type+'/delete/'+element.value, true);
+            }
             xhr.setRequestHeader('X-CSRF-TOKEN', token);
             xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
             xhr.send();

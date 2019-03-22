@@ -16,6 +16,6 @@
         public function store(ImagesRequest $request, PhotosRepository $photosRepository)
         {
             $photosRepository->save($request->image);
-            return AdminController::media();
+            return back();
         }
     }

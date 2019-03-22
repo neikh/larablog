@@ -73,6 +73,7 @@ class adminController extends Controller
     }
 
     public function delete($type, $id){
+
         if ($type == "post"){
             $posts = \App\Post::where('id', $id)->get();
             $comments = \App\Comment::where('post_id', $id)->get();
@@ -85,6 +86,17 @@ class adminController extends Controller
                 $post->delete();
             }
         }
+
+        if ($type == "media"){
+            if (\Storage::exists('public/thumb/'.$id)) {
+                \Storage::delete('public/thumb/'.$id);
+            }
+
+            if (\Storage::exists('public/'.$id)) {
+                \Storage::delete('public/'.$id);
+            }
+        }
+
     }
 
     public function update(Request $request){
