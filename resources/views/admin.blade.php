@@ -73,17 +73,29 @@
 
                     @if (isset($link) AND $link == "media")
                         <div>
-                            <div class="text-center">
+                            <div>
                                 <form action="/admin/media" method="POST" enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    Media to upload
-                                    <br />
-                                    <input type="file" name="image" value="" />
-                                    <br /><br />
-                                    <input type="submit" name="valide" value="Save" />
-                                    <br /><br />
-                                </form>
-                            </div>
+
+                                    <div class="container my-xl-3">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">Media to upload</div>
+
+                                                    <div class="card-body text-center">
+                                                            <br />
+                                                            <label for="image" class="pointer font-weight-bold">Click here to select a media</label>
+                                                            <input type="file" id="image" name="image" style="display:none" onchange="mediaUpdate(this); return false" />
+                                                            <br /><span id="displayer">No file loaded yet...</span><br />
+                                                            <input type="submit" name="valide" value="Save" />
+                                                            <br /><br />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                             @if(isset($files))
                                 <div class="container">

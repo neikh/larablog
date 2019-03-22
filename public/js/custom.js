@@ -128,4 +128,10 @@ function joke(element) {
     }, speed);
 
     return audio.pause();
-};
+}
+
+function mediaUpdate(element){
+    var n = element.value.lastIndexOf('\\');
+    var result = element.value.substring(n + 1);
+    document.getElementById('displayer').textContent = result;
+}
